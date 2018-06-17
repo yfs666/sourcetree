@@ -94,22 +94,24 @@ public class ComprehensiveTest {
 //TODO   带值的标记
 //        comprehensive.setValueTag();
     }
+	//fasdfsdfsdfdsf
 	@Test
 	pubulic void test1() {
 		//这是aaa文件夹的test文件
 	}
-
-	@Test
-	pubulic void testfasdfsd() {
-		//打开附近的空间发的卡死了发多少发送到发送到发斯蒂芬手动发水立方奥斯卡了发
-		//fajsdl;fjasdlfdsklfjsdlfjsldjfsldajfksadljfksadljfklsd
-	}
-
+  //fasdfsadfsdfsdfds
 	@Test
 	pubulic void tesfsdfdstfasdfsd() {
 		run();
 		//fasdjifsdlfjsdfjsdifjds
 	}
-
-
+//fasdfsdfsadfas
+	@Test
+	pubulic void testfasdfsd() {
+		//打开附近的空间发的卡死了发多少发送到发送到发斯蒂芬手动发水立方奥斯卡了发
+		//fajsdl;fjasdlfdsklfjsdlfjsldjfsldajfksadljfksadljfklsd
+	}
+//fasdfsdfsdfds
+	
+//发大水发斯蒂芬
 }
