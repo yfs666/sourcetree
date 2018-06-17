@@ -94,6 +94,10 @@ public class ComprehensiveTest {
 //TODO   带值的标记
 //        comprehensive.setValueTag();
     }
+	@Test
+	pubulic void test1() {
+		//这是aaa文件夹的test文件
+	}
 
 
 }
