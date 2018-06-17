@@ -91,6 +91,9 @@ public class ComprehensiveTest {
 //            }
             comprehensiveRepository.save(comprehensive);
         }
+//TODO   带值的标记
+//        comprehensive.setValueTag();
+    }
 
 
 }
