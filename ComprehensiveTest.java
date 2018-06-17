@@ -170,23 +170,7 @@ public class ComprehensiveTest {
         BigDecimal upRatio = todayClose.divide(startClose);
         System.out.println(upRatio.toString());
     }
-	//getTagValue commend     bbbbb
-	@Override
-    public Object getTagValue(StockPriceDO priceInfo) {
-        Double percent = priceInfo.getPercent();
-        //0直接表示0，如果不是0，
-        if (percent == 0) {
-            return 0;
-        }
-        if (percent >= 10) {
-            return 10;
-        }
-        if (percent <= -10) {
-            return -10;
-        }
-        String section = this.getSection(percent);
-        return section;
-    }
+	
 
     /**bbbb
      * 整数绝对值大的是闭区间，比如2表示在 2~3之间   -5表示  ~5~-6之间
@@ -213,6 +197,37 @@ public class ComprehensiveTest {
         return section;
     }
 
+	//getTagValue commend     bbbbb
+	@Override
+    public Object getTagValue(StockPriceDO priceInfo) {
+        Double percent = priceInfo.getPercent();
+        //0直接表示0，如果不是0，
+        if (percent == 0) {
+            return 0;
+        }
+        if (percent >= 10) {
+            return 10;
+        }
+        if (percent <= -10) {
+            return -10;
+        }
+        String section = this.getSection(percent);
+        return section;
+    }
+
+//aaaaa
+	@Override
+    public Object getTagValue(StockPriceDO priceInfo) {
+        //按照时间倒序查询最近一个大约当天最高点的数据
+        StockPriceDO preHigh = stockPriceMapper.getLatestNewHigh(priceInfo.getCode(), priceInfo.getHigh(), priceInfo.getTime());
+        if (preHigh == null) {
+            return 0;
+        }
+        //量时间段的数量
+        Integer count = stockPriceMapper.countByDate(priceInfo.getCode(), preHigh.getTime(), priceInfo.getTime());
+        return count;
+    }
+	//aaaaa
 
 
 }
