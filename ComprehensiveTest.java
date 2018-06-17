@@ -94,6 +94,14 @@ public class ComprehensiveTest {
 //TODO   带值的标记
 //        comprehensive.setValueTag();
     }
-
-
+	//这是B文件新添加内容的注释
+	@Test
+	public void methodForB() {
+		//为方法b添加一些注释和实现
+	}
+	//BB注释
+	@Test
+	public void methodForB2() {
+		//为方法b2添加一些注释和实现
+	}
 }
