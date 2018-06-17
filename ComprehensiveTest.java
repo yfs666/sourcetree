@@ -95,5 +95,17 @@ public class ComprehensiveTest {
 //        comprehensive.setValueTag();
     }
 
+	@Test
+	pubulic void testfasdfsd() {
+		//打开附近的空间发的卡死了发多少发送到发送到发斯蒂芬手动发水立方奥斯卡了发
+		//fajsdl;fjasdlfdsklfjsdlfjsldjfsldajfksadljfksadljfklsd
+	}
+
+	@Test
+	pubulic void tesfsdfdstfasdfsd() {
+		run();
+		//fasdjifsdlfjsdfjsdifjds
+	}
+
 
 }
