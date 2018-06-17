@@ -94,6 +94,18 @@ public class ComprehensiveTest {
 //TODO   带值的标记
 //        comprehensive.setValueTag();
     }
+
+	/**
+     * 统计某时间段内该code对应的数量
+     */
+    @Select("select count(*) from stock_today_price where code =#{code} and time > #{start}  and time < #{end}  ")
+    Integer countByDate(@Param("code") String code, @Param("start") Date start, @Param("end") Date end);
+
+    @Select("select * from stock_today_price where code =#{code} and time >= #{date} order by time limit #{limit}  ")
+    List<StockPriceDO> getEarliestByDate(@Param("code") String code, @Param("date") Date date, @Param("limit") Integer limit);
+
+    @Select("select avg(percent) from stock_today_price where time=#{time} and code like #{code} ")
+    BigDecimal countIncrease( @Param("code") String code, @Param("time") Date time);
 	
 //这是A文件新添加内容的注释
 	@Test
@@ -117,4 +129,48 @@ public class ComprehensiveTest {
 	public void methodForB2() {
 		//为方法b2添加一些注释和实现
 	}
+	//getTagValue commend     bbbbb
+	@Override
+    public Object getTagValue(StockPriceDO priceInfo) {
+        Double percent = priceInfo.getPercent();
+        //0直接表示0，如果不是0，
+        if (percent == 0) {
+            return 0;
+        }
+        if (percent >= 10) {
+            return 10;
+        }
+        if (percent <= -10) {
+            return -10;
+        }
+        String section = this.getSection(percent);
+        return section;
+    }
+
+    /**bbbb
+     * 整数绝对值大的是闭区间，比如2表示在 2~3之间   -5表示  ~5~-6之间
+     * @param number
+     * @return
+     */
+    private String getSection(double number) {
+        double floor = Math.floor(number);
+        double ceil = Math.ceil(number);
+        String section = "";
+        if (number > 0) {
+            if (floor == ceil) {
+                BigDecimal ceilDecimal = new BigDecimal(ceil);
+                ceil = ceilDecimal.add(new BigDecimal(1)).doubleValue();
+            }
+            section = floor + "~" + ceil;
+        } else {
+            if (floor == ceil) {
+                BigDecimal floorDecimal = new BigDecimal(floor);
+                floor = floorDecimal.subtract(new BigDecimal(1)).doubleValue();
+            }
+            section = ceil + "~" + floor;
+        }
+        return section;
+    }
+
+
 }
