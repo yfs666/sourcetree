@@ -91,6 +91,9 @@ public class ComprehensiveTest {
 //            }
             comprehensiveRepository.save(comprehensive);
         }
+//TODO   带值的标记
+//        comprehensive.setValueTag();
+    }
 
 //这是A文件新添加内容的注释
 	@Test
