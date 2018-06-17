@@ -92,5 +92,17 @@ public class ComprehensiveTest {
             comprehensiveRepository.save(comprehensive);
         }
 
+//这是A文件新添加内容的注释
+	@Test
+	public Integer methodForA() {
+		//为方法a添加一些注释和实现
+		return 0;
+	}
+	//AAAAAAAAAAAAAA注释
+	@Test
+	public String methodForA2() {
+		//为方法A2添加一些注释和实现
+		return null;
+	}
 
 }
