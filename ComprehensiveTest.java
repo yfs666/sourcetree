@@ -50,6 +50,11 @@ public class ComprehensiveTest {
         System.out.println(count);
     }
 
+	@Override
+    public Boolean validateRule(StockPriceDO priceInfo) {
+        return priceInfo.getMa5() >= priceInfo.getClose() && priceInfo.getClose() >= priceInfo.getMa10();
+    }
+
     @Test
     public void comprehensivetagTest() {
         for (ComprehensiveTypeEnum type : ComprehensiveTypeEnum.values()) {
@@ -117,4 +122,41 @@ public class ComprehensiveTest {
 	public void methodForB2() {
 		//为方法b2添加一些注释和实现
 	}
+	//aaaaa
+	@Override
+    public Object getTagValue(StockPriceDO priceInfo) {
+        //按照时间倒序查询最近一个大约当天最高点的数据
+        StockPriceDO preHigh = stockPriceMapper.getLatestNewHigh(priceInfo.getCode(), priceInfo.getHigh(), priceInfo.getTime());
+        if (preHigh == null) {
+            return 0;
+        }
+        //量时间段的数量
+        Integer count = stockPriceMapper.countByDate(priceInfo.getCode(), preHigh.getTime(), priceInfo.getTime());
+        return count;
+    }
+	//aaaaa
+	 @Override
+    public Object getTagValue(StockPriceDO priceInfo) {
+        Date startDate = this.getStartDate(priceInfo);
+        List<StockPriceDO> priceDOS = stockPriceMapper.getEarliestByDate(priceInfo.getCode(), startDate, 1);
+        if (CollectionUtils.isEmpty(priceDOS)) {
+            return 0;
+        }
+        StockPriceDO startPriceInfo = priceDOS.get(0);
+        //根据开始时间，计算这段时间的增幅，下降用负数表示
+        BigDecimal todayClose = new BigDecimal(priceInfo.getClose());
+        BigDecimal startClose = new BigDecimal(startPriceInfo.getClose());
+        // 格式化，并且四舍五入一下,由于展示的是百分比，先乘以100再算
+        BigDecimal upAmount = todayClose.subtract(startClose).multiply(new BigDecimal("100"));
+        BigDecimal upRatio = upAmount.divide(startClose,2, BigDecimal.ROUND_HALF_UP);
+        return upRatio.doubleValue() + "%";
+    }
+
+    public static void main(String[] args) {
+        BigDecimal todayClose = new BigDecimal(1);
+        BigDecimal startClose = new BigDecimal(3);
+        BigDecimal upRatio = todayClose.divide(startClose);
+        System.out.println(upRatio.toString());
+    }
+
 }
